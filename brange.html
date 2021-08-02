@@ -89,7 +89,7 @@
     <div class="container">
         <nav>
             <a href="Diabetic.html" class="nav__logo" style="text-decoration: none;color: #707070; font-family: 'Kirang Haerang', cursive;font-size: x-large;">Diabetic Care</a>
-            <img src="/img/moon.png" id="icon">
+            <img src="moon.png" id="icon">
         </nav>
         <h1 style="text-align:center;font-family: 'Merienda', cursive;text-align: center;">Blood glucose Range</h1>
         <div class="bmi-box">
@@ -140,18 +140,18 @@
             document.body.classList.remove("dark-theme");
         }
          else if(localData == "dark"){
-             icon.src="img/sun.png";
+             icon.src="sun.png";
              document.body.classList.add("dark-theme");
          }
          icon.onclick = function(){
          document.body.classList.toggle("dark-theme");
           
         if(document.body.classList.contains("dark-theme")){
-         icon.src="img/sun.png";
+         icon.src="sun.png";
          localStorage.setItem("theme","dark");
          }
          else{
-         icon.src="img/moon.png";
+         icon.src="moon.png";
          localStorage.setItem("theme","light"); 
          }
          }
