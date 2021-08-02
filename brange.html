@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kirang+Haerang&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Kirang+Haerang&&family=Merienda:wght@700&family=Rock+Salt&display=swap" rel="stylesheet">
+
+    <title>Blood Sugar Range</title>
+    <style>
+         
+      body{
+         
+          background-color: var(--primary-color);
+      }
+     
+      
+      .decoration-one{ 
+      background-color:#4a7bd6;
+      margin:0;
+      padding:0;
+      border-radius: 12px;
+      padding: 9px;
+      font-weight: bold;
+      align-items:center;
+      }
+      .decoration-one:hover{
+          background-color: #5560ca;
+      }
+     .bmi-box{
+         margin:5rem auto;
+         width:33.33%;
+         padding:20px;
+         border-radius:8px;
+         background:var(--primary-color);
+     }
+     .form-group input{
+         margin-bottom:4rem;
+     }
+  
+   
+     @media(max-width:746px){
+    .bmi-box{
+        width:85%;
+    }
+}
+.nav__logo:hover{
+          color:#4a7bd6;
+}
+ .nav__logo{
+          color:var(--secondary-color);
+          font-weight: 500;
+          
+      }
+      
+      #icon{
+          width: 20px;
+          cursor: pointer;
+          float:right;
+          height:20px;
+      }
+    /* :root{
+    --primary-color:#edf2fc;
+    --secondary-color:#212121;       
+    } */
+      .dark-theme{
+          --primary-color: #000106;
+          --secondary-color: #fff;
+
+      }
+      h1{
+          color:var(--secondary-color);
+          
+      }
+      label{
+          color:var(--secondary-color);
+      }
+      
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="Diabetic.html" class="nav__logo" style="text-decoration: none;color: #707070; font-family: 'Kirang Haerang', cursive;font-size: x-large;">Diabetic Care</a>
+            <img src="/img/moon.png" id="icon">
+        </nav>
+        <h1 style="text-align:center;font-family: 'Merienda', cursive;text-align: center;">Blood glucose Range</h1>
+        <div class="bmi-box">
+          
+            <form name="calculate">
+                
+                <div class="form-group">
+                    <label>Blood glucose level before meal</label>
+                    <div class="input-group">
+                        <input type="text" name="glucose" class="adp-input form-control" placeholder="Enter " autocomplete="off">
+                        <span class="input-group-addon">mg/dl</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Blood glucose level after meal</label>
+                    <div class="input-group">
+                        <input type="text" name="glucose1" class="adp-input form-control" placeholder="Enter " autocomplete="off">
+                        <span class="input-group-addon">mg/dl</span>
+                    </div>
+                </div>
+                
+                <input class="decoration-one px-3 py-2" type="button" value="Calculate My Range"
+                 onclick="calculateRange()">
+                 <br><br>
+                 <div class="bmr-result">
+                    <input type="text" name="meaning" class="adp-input form-control" size="100" autocomplete="off " readonly>
+                    <br><br>
+                    <input type="text" name="meaning1" id="a1" class="adp-input form-control" size="100" autocomplete="off" readonly style="color:#000106; font-style: oblique;">
+
+                   </div>
+                   <br><br>
+                    <input class="decoration-one px-3 py-2" type="reset" value="Reset" />
+                </form>
+                
+                </div>
+    </div>
+    
+        <script>
+               var icon = document.getElementById("icon");
+        
+         if(localStorage.getItem("theme")== null){
+             localStorage.setItem("theme","light");
+         }
+          let localData = localStorage.getItem("theme");
+          
+         if(localData == "light"){
+            icon.src="img/moon.png";
+            document.body.classList.remove("dark-theme");
+        }
+         else if(localData == "dark"){
+             icon.src="img/sun.png";
+             document.body.classList.add("dark-theme");
+         }
+         icon.onclick = function(){
+         document.body.classList.toggle("dark-theme");
+          
+        if(document.body.classList.contains("dark-theme")){
+         icon.src="img/sun.png";
+         localStorage.setItem("theme","dark");
+         }
+         else{
+         icon.src="img/moon.png";
+         localStorage.setItem("theme","light"); 
+         }
+         }
+            function calculateRange(){
+                var glucose = document.calculate.glucose.value;
+                var glucose1 = document.calculate.glucose1.value;
+                if(glucose > 0 && glucose1 > 0){
+                if(glucose <= 70 && glucose1 <= 100){
+                    document.calculate.meaning.value = "your blood glucose level is  low "
+                    
+                    document.calculate.meaning1.value = "Conduct your Endocrinologist and follow our suggestion "
+                   
+                 
+                   
+                }
+                if(glucose >= 80 && glucose1 <= 180 || glucose <= 80 && glucose1 <= 180 ){
+                    document.calculate.meaning.value = " your blood glucose level is normal" 
+                    document.calculate.meaning1.value = "Maintain These level and follow our suggestion"                    
+                }
+                if(glucose >= 90 && glucose1 >= 180){
+                    document.calculate.meaning.value = "your blood glucose level is  high "
+                    document.calculate.meaning1.value = "Conduct your Endocrinologist and follow our suggestion "
+                }
+                if(glucose1 - glucose >=100){
+                    document.calculate.meaning.value = "your blood glucose level is  high after meals"
+                    document.calculate.meaning1.value = "Conduct your Endocrinologist  "
+                }
+            }
+            else{
+                alert("enter valid data");
+            }
+        }
+     
+        
+
+        
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet'>
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kirang+Haerang&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Kirang+Haerang&&family=Merienda:wght@700&family=Rock+Salt&display=swap" rel="stylesheet">
+    <title>BMI CALCULATION</title>
+    <style>
+      body{
+          background-color: var(--primary-color);
+      } 
+      .decoration-one{ 
+      background-color:#4a7bd6;
+      margin:0;
+      padding:0;
+      border-radius: 12px;
+      padding: 9px;
+      font-weight: bold;
+      align-items:center;
+      }
+      .decoration-one:hover{
+          background-color:#5560ca;
+      }
+     .bmi-box{
+         margin:5rem auto;
+         width:33.33%;
+         padding:20px;
+         border-radius:8px;
+         background: var(--primary-color);
+     }
+     .form-group input{
+         margin-bottom:4rem;
+     }
+     @media(max-width:746px){
+    .bmi-box{
+        width:85%;
+    }
+}
+.nav__logo:hover{
+          color:#4a7bd6;
+}
+ .nav__logo{
+          color:#707070;
+          font-weight: 500;
+          
+      }
+      
+      #icon{
+          width: 30px;
+          cursor: pointer;
+          float:right;
+      }
+   
+ 
+      .dark-theme{
+          --primary-color: #1D2521;
+          --secondary-color: #fff;
+
+      }
+      h1{
+          color:var(--secondary-color);
+      }
+      label{
+         color:var(--secondary-color);
+      }
+      #icon{
+          width:20px;
+          height:20px;
+      }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="Diabetic.html" class="nav__logo" style="text-decoration: none;color: #707070;font-family: 'Kirang Haerang', cursive;font-size: x-large;">Diabetic Care</a>
+            <img src="/img/moon.png" id="icon">
+        </nav>
+        <h1 style="font-family: 'Merienda', cursive;text-align: center;">Calculate BMI</h1>
+        <div class="bmi-box">
+            
+            <form name="bmicalculate">
+                
+                <div class="form-group">
+                    <label>Weight</label>
+                    <div class="input-group">
+                        <input type="text" name="weight" class="adp-input form-control"  placeholder="Enter your weight" autocomplete="off">
+                        <span class="input-group-addon">kg</span>
+                    </div>
+                </div>
+                
+                 <div class="form-group">
+                    <label>Height</label>
+                    <div class="input-group">
+                        <input type="text" name="height" class="adp-input form-control" placeholder="Enter your height" autocomplete="off">
+                        <span class="input-group-addon">cm</span>
+                    </div>
+                </div>
+               
+                 <input class="decoration-one px-3 py-2" type="button" value="Calculate BMI"
+                 onclick="calculateBMI()">
+                 <br><br>
+                 <div class="form-group">
+                     <label>
+                        your BMI will be here
+                     </label>
+                 <input type="text" name="bmi" class="adp-input form-control"  size="40" autocomplete="off" readonly>
+                 </div>
+                 <div class="form-group">
+                    <input type="text" name="meaning" class="adp-input form-control" size="30" autocomplete="off" readonly>
+                    </div>
+                    <input class="decoration-one px-3 py-2" type="reset" value="Reset" />
+                 
+               
+            </form>
+            
+            
+        
+        </div>
+       
+    </div>
+    <script>
+       var icon = document.getElementById("icon");
+        
+        if(localStorage.getItem("theme")== null){
+            localStorage.setItem("theme","light");
+        }
+         let localData = localStorage.getItem("theme");
+         
+        if(localData == "light"){
+           icon.src="img/moon.png";
+           document.body.classList.remove("dark-theme");
+       }
+        else if(localData == "dark"){
+            icon.src="img/sun.png";
+            document.body.classList.add("dark-theme");
+        }
+        icon.onclick = function(){
+        document.body.classList.toggle("dark-theme");
+         
+       if(document.body.classList.contains("dark-theme")){
+        icon.src="img/sun.png";
+        localStorage.setItem("theme","dark");
+        }
+        else{
+        icon.src="img/moon.png";
+        localStorage.setItem("theme","light"); 
+        }
+        }
+        function calculateBMI(){
+            var weight = document.bmicalculate.weight.value;
+            var height = document.bmicalculate.height.value;
+            if(weight > 0 && height > 0){
+                var finalBmi = (weight/height/height)*10000;
+                document.bmicalculate.bmi.value = finalBmi.toFixed(3);
+                if(finalBmi < 18.5){
+                    document.bmicalculate.meaning.value = " you are unhealthy, too thin.";
+                }
+                if(finalBmi > 18.5 && finalBmi < 25){
+                    document.bmicalculate.meaning.value =" you are healthy enough.";
+                }
+                if(finalBmi > 25 && finalBmi < 30){
+                    document.bmicalculate.meaning.value =" you are overweight.";
+                }
+                if(finalBmi > 30){
+                    document.bmicalculate.meaning.value =" you condition is serious.";
+                }
+            }
+            else{
+                alert("Data you have entered might be incorrect. Please Try again");
+            }
+
+        }
+      
+
+    
+        </script>
+</body>
+</html>
