@@ -1,5 +1,5 @@
 <?php
 
-include_once("diabetic.html");
+include_once("index.html");
 
 ?>
